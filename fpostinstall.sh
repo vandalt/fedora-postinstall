@@ -139,6 +139,7 @@ sudo gtk-update-icon-cache /usr/share/icons/hicolor
 # enable
 gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
 gnome-extensions enable tray-icons@zhangkaizhao.com
+gnome-extensions enable hide-keyboard-layout@sitnik.ru
 gnome-extensions enable putWindow@clemens.lab21.org
 gnome-extensions enable hidetopbar@mathieu.bidon.ca
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
