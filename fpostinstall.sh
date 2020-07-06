@@ -11,6 +11,7 @@ PKGS_DNF=(
     'papirus-icon-theme'
     'libreoffice-icon-theme-papirus'
     'paper-icon-theme'
+    'qt5-qtstyleplugins'
 
     # BROWSER
     'firefox'
@@ -221,6 +222,20 @@ wget -qO- https://git.io/papirus-folders-install | sh
 papirus-folders -C violet --theme Papirus-Dark
 wget -qO- https://git.io/papirus-folders-install | env uninstall=true sh
 
+#############
+### FONTS ###
+#############
+cat fontconfig >> ~/.config/fontconfig/fonts.conf
+fc-cache -f
+
+###############
+### FIREFOX ###
+###############
+for profile in ~/.mozilla/firefox/*.default-release
+do
+	mkdir $profile/chrome
+	cat userContent.CSS > $profile/chrome/userContent.css
+
 ################
 ### TERMINAL ###
 ################
@@ -382,3 +397,5 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8/ name 'Zotero'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8/ command 'zotero'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8/ binding '<Super>z'
+
+echo "Do not forget to activate toolkit.legacyUserProfileCustomizations.stylesheets in Firefox"
