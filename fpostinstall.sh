@@ -99,7 +99,7 @@ for PKG in "${PKGS_RM[@]}"; do
 done
 
 # install with dnf from default repos
-for PKG in "${PKGS_PAC[@]}"; do
+for PKG in "${PKGS_DNF[@]}"; do
     echo "INSTALLING: ${PKG}"
     sudo dnf install -y "$PKG"
 done
