@@ -4,6 +4,8 @@
 ### INSTALL SOFTWARE ###
 ########################
 
+shopt -s expand_aliases
+
 PKGS_DNF=(
 
     # STYLE
@@ -131,6 +133,16 @@ sudo dnf install libappindicator-gtk3 python3-psutil -y
 sudo pip3 install safeeyes
 sudo gtk-update-icon-cache /usr/share/icons/hicolor
 
+##################
+#### DOTFILES ####
+##################
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+echo ".dotfiles" >> .gitignore
+git clone --bare git@github.com:vandalt/dotfiles.git $HOME/.dotfiles
+config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} rm -rf {}
+config checkout
+config config --local status.showUntrackedFiles no
+config checkout fedora
 
 ##################
 ### EXTENSIONS ###
@@ -180,7 +192,7 @@ gsettings --schemadir ~/.local/share/gnome-shell/extensions/putWindow@clemens.la
 gsettings --schemadir ~/.local/share/gnome-shell/extensions/putWindow@clemens.lab21.org/schemas/ set org.gnome.shell.extensions.org-lab21-putwindow put-to-side-s "['<Shift><Super>j']"
 gsettings --schemadir ~/.local/share/gnome-shell/extensions/putWindow@clemens.lab21.org/schemas/ set org.gnome.shell.extensions.org-lab21-putwindow put-to-corner-sw "['<Shift><Super>m']"
 gsettings --schemadir ~/.local/share/gnome-shell/extensions/putWindow@clemens.lab21.org/schemas/ set org.gnome.shell.extensions.org-lab21-putwindow put-to-corner-nw "['<Shift><Super>u']"
-gsettings --schemadir ~/.local/share/gnome-shell/extensions/putWindow@clemens.lab21.org/schemas/ set org.gnome.shell.extensions.org-lab21-putwindow put-to-corner-se "['<Shift><Super>eacute']"
+gsettings --schemadir ~/.local/share/gnome-shell/extensions/putWindow@clemens.lab21.org/schemas/ set org.gnome.shell.extensions.org-lab21-putwindow put-to-corner-se "['<Shift><Super>question']"
 gsettings --schemadir ~/.local/share/gnome-shell/extensions/putWindow@clemens.lab21.org/schemas/ set org.gnome.shell.extensions.org-lab21-putwindow put-to-corner-ne "['<Shift><Super>p']"
 gsettings --schemadir ~/.local/share/gnome-shell/extensions/putWindow@clemens.lab21.org/schemas/ set org.gnome.shell.extensions.org-lab21-putwindow put-to-right-screen "['<Super>semicolon']"
 gsettings --schemadir ~/.local/share/gnome-shell/extensions/putWindow@clemens.lab21.org/schemas/ set org.gnome.shell.extensions.org-lab21-putwindow put-to-left-screen "['<Super>colon']"
