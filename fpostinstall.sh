@@ -210,7 +210,7 @@ gsettings --schemadir ~/.local/share/gnome-shell/extensions/putWindow@clemens.la
 gsettings --schemadir ~/.local/share/gnome-shell/extensions/putWindow@clemens.lab21.org/schemas/ set org.gnome.shell.extensions.org-lab21-putwindow move-focus-cycle-enabled 0
 
 # auto-move-apps
-gsettings --schemadir ~/.local/share/gnome-shell/extensions/auto-move-windows@gnome-shell-extensions.gcampax.github.com/schemas/ set org.gnome.shell.extensions.auto-move-windows application-list "['firefox.desktop:2', 'chromium.desktop:2', 'thunderbird.desktop:6', 'joplin.desktop:3', 'spotify.desktop:7', 'slack.desktop:6', 'cpod.desktop:7']"
+gsettings --schemadir ~/.local/share/gnome-shell/extensions/auto-move-windows@gnome-shell-extensions.gcampax.github.com/schemas/ set org.gnome.shell.extensions.auto-move-windows application-list "['firefox.desktop:2', 'chromium.desktop:2', 'mozilla-thunderbird.desktop:6', 'org.joplinapp.Joplin.desktop:3', 'spotify.desktop:7', 'slack.desktop:6']"
 
 ###################
 ### GNOME THEME ###
