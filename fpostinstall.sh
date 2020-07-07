@@ -31,6 +31,9 @@ PKGS_DNF=(
 
     # PDF
     'xournalpp'
+    
+    # VIDEO
+    vlc
 
     # ASTRO
     'stellarium'
@@ -88,6 +91,10 @@ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/
 bash ~/miniconda3.sh -b -p $HOME/miniconda3
 rm ~/miniconda3.sh
 
+# RPMFusion repos
+sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm -y
+sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y
+
 # remove unused built-in packages
 for PKG in "${PKGS_RM[@]}"; do
     echo "REMOVING: ${PKG}"
@@ -119,8 +126,6 @@ for PKG in "${PKGS_FLATPAK[@]}"; do
 done
 
 # Spotify
-sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm -y
-sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y
 sudo dnf install lpf-spotify-client -y
 yes | DISPLAY= lpf update
 
