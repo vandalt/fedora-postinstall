@@ -30,11 +30,7 @@ PKGS_DNF=(
     'gimp'
 
     # PDF
-    'okular'
     'xournalpp'
-
-    # VIDEO
-    'vlc'
 
     # ASTRO
     'stellarium'
@@ -68,7 +64,6 @@ PKGS_FLATPAK=(
 
 PKGS_RM=(
     #GNOME DEFAULT
-    'evince*'
     'gnome-maps'
     'gnome-weather'
     'gnome-contacts'
