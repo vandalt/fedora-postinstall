@@ -43,7 +43,7 @@ PKGS_DNF=(
     'gvim'
     'htop'
     'screen'
-    'gnome-tweak'
+    'gnome-tweaks'
     'gnome-extensions-app'
 )
 
@@ -238,7 +238,6 @@ wget -qO- https://git.io/papirus-folders-install | env uninstall=true sh
 #############
 ### FONTS ###
 #############
-cat fontconfig >> ~/.config/fontconfig/fonts.conf
 fc-cache -f
 
 ###############
@@ -247,7 +246,8 @@ fc-cache -f
 for profile in ~/.mozilla/firefox/*.default-release
 do
 	mkdir $profile/chrome
-	cat userContent.CSS > $profile/chrome/userContent.css
+    mv userContent.css $profile/chrome
+done
 
 ################
 ### TERMINAL ###
@@ -412,3 +412,4 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8/ binding '<Super>z'
 
 echo "Do not forget to activate toolkit.legacyUserProfileCustomizations.stylesheets in Firefox"
+echo "Reboot for all changes to take effect"
