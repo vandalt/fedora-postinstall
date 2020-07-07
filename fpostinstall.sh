@@ -91,6 +91,7 @@ bypass
 # install miniconda python
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3.sh
 bash ~/miniconda3.sh -b -p $HOME/miniconda3
+rm ~/miniconda3.sh
 
 # remove unused built-in packages
 for PKG in "${PKGS_RM[@]}"; do
