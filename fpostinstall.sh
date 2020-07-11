@@ -33,13 +33,27 @@ PKGS_DNF=(
     'xournalpp'
     
     # VIDEO
-    vlc
+    'vlc'
 
     # ASTRO
     'stellarium'
 
+    # DEV
+    'cmake'
+    'mono-complete'
+    'golang'
+    'nodejs'
+    'python-devel'
+    'automake'
+    'gcc-c++'
+    'kernel-devel'
+    'python3-numpy'
+    'python3-ipython'
+    'python3-flake8'
+
     # UTILS
-    'gvim'
+    'neovim'
+    'python3-neovim'
     'htop'
     'screen'
     'gnome-tweaks'
