@@ -299,7 +299,7 @@ gsettings set org.gnome.desktop.wm.preferences num-workspaces 7
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
 # favorite applications
-gsettings set org.gnome.shell favorite-apps "['org.gnome.Terminal.desktop', 'firefox.desktop', 'mozilla-thunderbird.desktop', 'org.joplinapp.Joplin.desktop', 'org.gnome.Nautilus.desktop', 'gvim.desktop', 'org.zotero.Zotero.desktop', 'spotify.desktop', 'libreoffice-impress.desktop','slack.desktop', 'us.zoom.Zoom.desktop']"
+gsettings set org.gnome.shell favorite-apps "['org.gnome.Terminal.desktop', 'firefox.desktop', 'mozilla-thunderbird.desktop', 'org.joplinapp.Joplin.desktop', 'org.gnome.Nautilus.desktop', 'nvim.desktop', 'org.zotero.Zotero.desktop', 'spotify.desktop', 'libreoffice-impress.desktop','slack.desktop', 'us.zoom.Zoom.desktop']"
 
 ##################
 #### SETTINGS ####
