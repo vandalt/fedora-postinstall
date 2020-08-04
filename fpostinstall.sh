@@ -262,7 +262,7 @@ fc-cache -f
 for profile in ~/.mozilla/firefox/*.default-release
 do
 	mkdir $profile/chrome
-    cp userContent.css $profile/chrome
+    cp ~/.firefox_userContent.css $profile/chrome/userContent.css
 done
 
 ################
