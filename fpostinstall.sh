@@ -18,13 +18,18 @@ PKGS_DNF=(
     # BROWSER
     'firefox'
     'chromium'
+    'qutebrowser'
 
     # LATEX
     'texlive-scheme-full'
 
     # OFFICE
-    'thunderbird'
     'onedrive'
+
+    # EMAIL
+    'neomutt'
+    'isync'
+    'msmtp'
 
     # IMAGE EDITING
     'gimp'
@@ -70,15 +75,18 @@ PKGS_COPR=(
     # SLACK
     'jdoss/slack-repo slack-repo slack'
 
+    # NEOMUTT
+    'flatcap/neomutt neomutt'
+
 )
 
-PKGS_FLATPAK=(
-
-    # OFFICE
-    'org.kde.kdenlive'
-    'us.zoom.Zoom'
-    'org.zotero.Zotero'
-)
+#PKGS_FLATPAK=(
+#
+#    # OFFICE
+#    'org.kde.kdenlive'
+#    'us.zoom.Zoom'
+#    'org.zotero.Zotero'
+#)
 
 PKGS_RM=(
     #GNOME DEFAULT
@@ -133,12 +141,12 @@ for PKG in "${PKGS_COPR[@]}"; do
     done
 done
 
-# Flatpaks
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-for PKG in "${PKGS_FLATPAK[@]}"; do
-    echo "INSTALLING: ${PKG}"
-    sudo flatpak install "$PKG" -y
-done
+## Flatpaks
+#flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+#for PKG in "${PKGS_FLATPAK[@]}"; do
+#    echo "INSTALLING: ${PKG}"
+#    sudo flatpak install "$PKG" -y
+#done
 
 # Spotify
 sudo dnf install lpf-spotify-client -y
@@ -159,6 +167,13 @@ config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} rm -rf {}
 config checkout
 config config --local status.showUntrackedFiles no
 config checkout fedora
+
+alias pconfig='/usr/bin/git --git-dir=$HOME/.private_dotfiles/ --work-tree=$HOME'
+echo ".private_dotfiles" >> .gitignore
+git clone --bare git@gitlab.com:vandalt/private_dotfiles.git $HOME/.private_dotfiles
+pconfig checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} rm -rf {}
+pconfig checkout
+pconfig config --local status.showUntrackedFiles no
 
 ##################
 ### EXTENSIONS ###
@@ -208,10 +223,10 @@ gsettings --schemadir ~/.local/share/gnome-shell/extensions/putWindow@clemens.la
 gsettings --schemadir ~/.local/share/gnome-shell/extensions/putWindow@clemens.lab21.org/schemas/ set org.gnome.shell.extensions.org-lab21-putwindow put-to-side-s "['<Shift><Super>j']"
 gsettings --schemadir ~/.local/share/gnome-shell/extensions/putWindow@clemens.lab21.org/schemas/ set org.gnome.shell.extensions.org-lab21-putwindow put-to-corner-sw "['<Shift><Super>m']"
 gsettings --schemadir ~/.local/share/gnome-shell/extensions/putWindow@clemens.lab21.org/schemas/ set org.gnome.shell.extensions.org-lab21-putwindow put-to-corner-nw "['<Shift><Super>u']"
-gsettings --schemadir ~/.local/share/gnome-shell/extensions/putWindow@clemens.lab21.org/schemas/ set org.gnome.shell.extensions.org-lab21-putwindow put-to-corner-se "['<Shift><Super>question']"
+gsettings --schemadir ~/.local/share/gnome-shell/extensions/putWindow@clemens.lab21.org/schemas/ set org.gnome.shell.extensions.org-lab21-putwindow put-to-corner-se "['<Shift><Super>slash']"
 gsettings --schemadir ~/.local/share/gnome-shell/extensions/putWindow@clemens.lab21.org/schemas/ set org.gnome.shell.extensions.org-lab21-putwindow put-to-corner-ne "['<Shift><Super>p']"
-gsettings --schemadir ~/.local/share/gnome-shell/extensions/putWindow@clemens.lab21.org/schemas/ set org.gnome.shell.extensions.org-lab21-putwindow put-to-right-screen "['<Super>semicolon']"
-gsettings --schemadir ~/.local/share/gnome-shell/extensions/putWindow@clemens.lab21.org/schemas/ set org.gnome.shell.extensions.org-lab21-putwindow put-to-left-screen "['<Super>colon']"
+gsettings --schemadir ~/.local/share/gnome-shell/extensions/putWindow@clemens.lab21.org/schemas/ set org.gnome.shell.extensions.org-lab21-putwindow put-to-right-screen "['<Super>bracketright']"
+gsettings --schemadir ~/.local/share/gnome-shell/extensions/putWindow@clemens.lab21.org/schemas/ set org.gnome.shell.extensions.org-lab21-putwindow put-to-left-screen "['<Super>bracketleft']"
 gsettings --schemadir ~/.local/share/gnome-shell/extensions/putWindow@clemens.lab21.org/schemas/ set org.gnome.shell.extensions.org-lab21-putwindow put-to-center "['<Shift><Super>space']"
 gsettings --schemadir ~/.local/share/gnome-shell/extensions/putWindow@clemens.lab21.org/schemas/ set org.gnome.shell.extensions.org-lab21-putwindow move-focus-west "['<Super>h']"
 gsettings --schemadir ~/.local/share/gnome-shell/extensions/putWindow@clemens.lab21.org/schemas/ set org.gnome.shell.extensions.org-lab21-putwindow move-focus-north "['<Super>k']"
@@ -225,7 +240,7 @@ gsettings --schemadir ~/.local/share/gnome-shell/extensions/putWindow@clemens.la
 gsettings --schemadir ~/.local/share/gnome-shell/extensions/putWindow@clemens.lab21.org/schemas/ set org.gnome.shell.extensions.org-lab21-putwindow move-focus-cycle-enabled 0
 
 # auto-move-apps
-gsettings --schemadir ~/.local/share/gnome-shell/extensions/auto-move-windows@gnome-shell-extensions.gcampax.github.com/schemas/ set org.gnome.shell.extensions.auto-move-windows application-list "['firefox.desktop:2', 'chromium.desktop:2', 'mozilla-thunderbird.desktop:6', 'org.joplinapp.Joplin.desktop:3', 'spotify.desktop:7', 'slack.desktop:6']"
+gsettings --schemadir ~/.local/share/gnome-shell/extensions/auto-move-windows@gnome-shell-extensions.gcampax.github.com/schemas/ set org.gnome.shell.extensions.auto-move-windows application-list "['firefox.desktop:2', 'chromium.desktop:2', 'neomutt.desktop:6', 'org.joplinapp.Joplin.desktop:3', 'spotify.desktop:7', 'slack.desktop:6']"
 
 ###################
 ### GNOME THEME ###
@@ -300,7 +315,7 @@ gsettings set org.gnome.desktop.wm.preferences num-workspaces 7
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
 # favorite applications
-gsettings set org.gnome.shell favorite-apps "['org.gnome.Terminal.desktop', 'firefox.desktop', 'mozilla-thunderbird.desktop', 'org.joplinapp.Joplin.desktop', 'org.gnome.Nautilus.desktop', 'nvim.desktop', 'org.zotero.Zotero.desktop', 'spotify.desktop', 'libreoffice-impress.desktop','slack.desktop', 'us.zoom.Zoom.desktop']"
+gsettings set org.gnome.shell favorite-apps "['org.gnome.Terminal.desktop', 'firefox.desktop', 'neomutt.desktop', 'org.joplinapp.Joplin.desktop', 'org.gnome.Nautilus.desktop', 'nvim.desktop', 'org.zotero.Zotero.desktop', 'spotify.desktop', 'libreoffice-impress.desktop','slack.desktop', 'us.zoom.Zoom.desktop']"
 
 ##################
 #### SETTINGS ####
@@ -394,18 +409,13 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 
 # email
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ name 'Mail'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ command 'thunderbird'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ command 'gnome-terminal -- neomutt'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ binding '<Super>m'
 
 # notes
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ name 'Notes'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ command 'joplin-desktop'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ command 'gnome-terminal -- joplin'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ binding '<Super>n'
-
-# pdf
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ name 'PDF'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ command 'evince'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ binding '<Super>p'
 
 # music
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/ name 'Music'
@@ -422,12 +432,13 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7/ command 'nautilus'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7/ binding '<Super>f'
 
-# zotero
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8/ name 'Zotero'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8/ command 'zotero'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8/ binding '<Super>z'
+# Setup emails
+mkdir -p $HOME/.mail/{personal,udem}
+mbsync -Va
+sudo systemctl daemon-reload
+systemctl --user enable mbsync.timer
+systemctl --user start mbsync.timer
 
 # make zsh the default
 chsh -s /usr/bin/zsh
-echo "Do not forget to activate toolkit.legacyUserProfileCustomizations.stylesheets in Firefox"
 echo "Reboot for all changes to take effect"
